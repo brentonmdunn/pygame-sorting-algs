@@ -6,5 +6,6 @@ The unsorted elements are in white and the sorted elements are in yellow. The cu
 ![](images/selection_sort.GIF)
 
 ## insertion_sort.py
+The unsorted elements are in white and the sorted elements are in yellow. The cursor (orange) starts at the first unsorted element. It then traverses the list backwards until it finds a spot where the element to the left of it is shorter than the orange element and taller on the right side.
 ![](images/insertion_sort.GIF)
 
