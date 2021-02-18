@@ -71,6 +71,8 @@ def main():
     next_sort = 0
     step = 0
     first = True
+    min_index = layout[0]
+    min_index.change_color(TEMP)
     while run:
         if first:
             cursor = next_sort + 1
