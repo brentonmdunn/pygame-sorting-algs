@@ -1,12 +1,6 @@
 import pygame
 import random
 
-WHITE = (255, 255, 255)
-DARK_AQUA = (38, 70, 83)
-YELLOW = (233, 196, 106)
-DARK_ORANGE = (231, 111, 81)
-
-
 WIDTH = 1000
 TOTAL_COLS = 100
 FPS = 400
@@ -14,6 +8,12 @@ GAP = WIDTH / TOTAL_COLS
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption('Insertion Sort Algorithm Visualizer!')
 clock = pygame.time.Clock()
+
+WHITE = (255, 255, 255)
+DARK_AQUA = (38, 70, 83)
+YELLOW = (233, 196, 106)
+DARK_ORANGE = (231, 111, 81)
+
 CURSOR_COLOR = DARK_ORANGE
 BACKGROUND_COLOR = DARK_AQUA
 COLUMN_COLOR = YELLOW
