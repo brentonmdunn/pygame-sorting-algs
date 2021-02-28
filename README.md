@@ -3,12 +3,12 @@ Data is always nice to work with when it is neat and orderly; however, raw data 
 
 ## Insertion Sort
 Insertion sort is a sorting algorithm where elements are sorted into two groups—sorted and unsorted. Elements in the unsorted group is organized within the sorted group. <br/><br/>
-The unsorted elements are in white, and the sorted elements are in yellow. The cursor (orange) starts at the first unsorted element. It then traverses the list backwards until it finds a spot where the element to the left of it is shorterand the element on the right is taller.<br/>
+The unsorted elements are in white, and the sorted elements are in yellow. The cursor (orange) starts at the first unsorted element. It then traverses the list backwards until it finds a spot where the element to the left of it is shorterand the element on the right is taller. <br/><br/>
 ![](images/insertion_sort.GIF)
 
 ## Selection Sort 
 Selection sort is a sorting algorithm where elements are sorted into two groups—sorted and unsorted. The cursor repeatedly finds the smallest element within the unsorted elements and swaps it with the unsorted element immediatly to the right of the sorted group. <br/><br/>
-The unsorted elements are in white, and the sorted elements are in yellow. The cursor (orange) goes through all the unsorted columns. When the cursor finds the shortest element, it highlights it in green. Once the cursor reaches the end, the program swaps the next unsorted element and the green element. <br/>
+The unsorted elements are in white, and the sorted elements are in yellow. The cursor (orange) goes through all the unsorted columns. When the cursor finds the shortest element, it highlights it in green. Once the cursor reaches the end, the program swaps the next unsorted element and the green element. <br/><br/>
 ![](images/selection_sort.GIF)
 
 
