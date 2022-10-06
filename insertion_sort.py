@@ -20,6 +20,15 @@ CURSOR_COLOR = DARK_ORANGE
 BACKGROUND_COLOR = DARK_AQUA
 COLUMN_COLOR = YELLOW
 
+# ------
+
+# MANAGER = pygame_gui.UIManager((WIDTH, WIDTH))
+
+# TEXT_INPUT = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(
+#     (350, 275), (900, 50)), manager=MANAGER, object_id="#main_text_entry")
+
+# ------
+
 
 class Col(object):
     def __init__(self, col_number, height):
@@ -52,8 +61,14 @@ def draw(win, layout):
     pygame.display.update()
 
 
-def main():
+def insertion_sort():
     run = True
+
+    # ------
+
+    # UI_REFRESH_RATE = clock.tick(60)/1000
+
+    # ------
 
     layout = []
     heights = []
@@ -93,9 +108,33 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    blank_page()
         draw(WIN, layout)
-        # clock.tick(FPS)
+        clock.tick(FPS)
     pygame.quit()
+
+
+def blank_page():
+    clock.tick(FPS)
+
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    insertion_sort()
+
+        WIN.fill("white")
+        pygame.display.update()
+
+
+def main():
+    insertion_sort()
 
 
 if __name__ == '__main__':
