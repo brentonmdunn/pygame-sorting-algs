@@ -24,7 +24,7 @@ COLUMN_COLOR = YELLOW
 MANAGER = pygame_gui.UIManager((WIDTH, WIDTH))
 
 TEXT_INPUT = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(
-    (350, 275), (900, 50)), manager=MANAGER, object_id="#main_text_entry")
+    (WIDTH * .25, 275), (WIDTH * .50, 50)), manager=MANAGER, object_id="#main_text_entry")
 
 # ------
 
@@ -115,14 +115,14 @@ def insertion_sort(text):
                 run = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    blank_page()
+                    insertion_sort_choose_number_of_columns()
         draw(WIN, layout)
         # clock.tick(FPS)
 
     pygame.quit()
 
 
-def blank_page():
+def insertion_sort_choose_number_of_columns():
     clock.tick(FPS)
 
     run = True
@@ -148,29 +148,29 @@ def blank_page():
         pygame.display.update()
 
 
-def get_user_name():
-    while True:
-        UI_REFRESH_RATE = clock.tick(60)/1000
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#main_text_entry":     # checks if enter button is pressed
-                # show_text(event.text)
-                continue
+# def get_user_name():
+#     while True:
+#         UI_REFRESH_RATE = clock.tick(60)/1000
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 pygame.quit()
+#                 sys.exit()
+#             if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#main_text_entry":     # checks if enter button is pressed
+#                 # show_text(event.text)
+#                 continue
 
-            MANAGER.process_events(event)
+#             MANAGER.process_events(event)
 
-        MANAGER.update(UI_REFRESH_RATE)
-        WIN.fill("white")
-        MANAGER.draw_ui(WIN)
+#         MANAGER.update(UI_REFRESH_RATE)
+#         WIN.fill("white")
+#         MANAGER.draw_ui(WIN)
 
-        pygame.display.update()
+#         pygame.display.update()
 
 
-def main():
-    blank_page()
+def main1():
+    insertion_sort_choose_number_of_columns()
 
 
 if __name__ == '__main__':
-    main()
+    main1()
