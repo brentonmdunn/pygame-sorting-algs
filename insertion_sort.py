@@ -1,5 +1,7 @@
 import pygame
 import random
+import pygame_gui
+import sys
 
 WIDTH = 1000
 TOTAL_COLS = 100
@@ -27,10 +29,12 @@ class Col(object):
         self.x = GAP * col_number
 
     def __lt__(self, other):
-        return self.height > other.height       # is reversed because height is space from top not height of column
+        # is reversed because height is space from top not height of column
+        return self.height > other.height
 
     def draw(self, win):
-        pygame.draw.rect(win, self.color, (self.x, self.height, GAP, WIDTH-self.height))
+        pygame.draw.rect(
+            win, self.color, (self.x, self.height, GAP, WIDTH-self.height))
 
     def change_color(self, color):
         if color == DARK_AQUA:
@@ -50,10 +54,12 @@ def draw(win, layout):
 
 def main():
     run = True
+
     layout = []
     heights = []
     for i in range(TOTAL_COLS):
-        rand_int = random.randint(int(WIDTH * .05), int(WIDTH - WIDTH * .05))       # padding so columns aren't too high
+        # padding so columns aren't too high
+        rand_int = random.randint(int(WIDTH * .05), int(WIDTH - WIDTH * .05))
         heights.append(rand_int)
     for i in range(TOTAL_COLS):
         layout.append(Col(i, heights[i]))
@@ -88,7 +94,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
         draw(WIN, layout)
-        clock.tick(FPS)
+        # clock.tick(FPS)
     pygame.quit()
 
 
