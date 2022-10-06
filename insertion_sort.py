@@ -4,12 +4,11 @@ import pygame_gui
 import sys
 
 WIDTH = 1000
-TOTAL_COLS = 100
 FPS = 400
-GAP = WIDTH / TOTAL_COLS
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption('Insertion Sort Algorithm Visualizer!')
 clock = pygame.time.Clock()
+pygame.init()
 
 WHITE = (255, 255, 255)
 DARK_AQUA = (38, 70, 83)
@@ -22,20 +21,21 @@ COLUMN_COLOR = YELLOW
 
 # ------
 
-# MANAGER = pygame_gui.UIManager((WIDTH, WIDTH))
+MANAGER = pygame_gui.UIManager((WIDTH, WIDTH))
 
-# TEXT_INPUT = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(
-#     (350, 275), (900, 50)), manager=MANAGER, object_id="#main_text_entry")
+TEXT_INPUT = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.Rect(
+    (350, 275), (900, 50)), manager=MANAGER, object_id="#main_text_entry")
 
 # ------
 
 
 class Col(object):
-    def __init__(self, col_number, height):
+    def __init__(self, col_number, height, GAP):
         self.col_number = col_number
         self.height = height
         self.color = WHITE
         self.x = GAP * col_number
+        self.GAP = GAP
 
     def __lt__(self, other):
         # is reversed because height is space from top not height of column
@@ -43,7 +43,7 @@ class Col(object):
 
     def draw(self, win):
         pygame.draw.rect(
-            win, self.color, (self.x, self.height, GAP, WIDTH-self.height))
+            win, self.color, (self.x, self.height, self.GAP, WIDTH-self.height))
 
     def change_color(self, color):
         if color == DARK_AQUA:
@@ -61,12 +61,17 @@ def draw(win, layout):
     pygame.display.update()
 
 
-def insertion_sort():
+def insertion_sort(text):
+
+    TOTAL_COLS = int(text)
+    GAP = WIDTH / TOTAL_COLS
+
     run = True
+    UI_REFRESH_RATE = clock.tick(60)/1000
 
     # ------
 
-    # UI_REFRESH_RATE = clock.tick(60)/1000
+    UI_REFRESH_RATE = clock.tick(60)/1000
 
     # ------
 
@@ -77,7 +82,7 @@ def insertion_sort():
         rand_int = random.randint(int(WIDTH * .05), int(WIDTH - WIDTH * .05))
         heights.append(rand_int)
     for i in range(TOTAL_COLS):
-        layout.append(Col(i, heights[i]))
+        layout.append(Col(i, heights[i], GAP))
     draw(WIN, layout)
     step = 0
     forward = 1
@@ -112,7 +117,8 @@ def insertion_sort():
                 if event.key == pygame.K_RETURN:
                     blank_page()
         draw(WIN, layout)
-        clock.tick(FPS)
+        # clock.tick(FPS)
+
     pygame.quit()
 
 
@@ -121,20 +127,49 @@ def blank_page():
 
     run = True
     while run:
+        UI_REFRESH_RATE = clock.tick(60)/1000
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    insertion_sort()
+            # if event.type == pygame.KEYDOWN:
+            #     if event.key == pygame.K_RETURN:
+            #         insertion_sort()
+            if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#main_text_entry":     # checks if enter button is pressed
+                insertion_sort(event.text)
+            MANAGER.process_events(event)
+
+        MANAGER.update(UI_REFRESH_RATE)
 
         WIN.fill("white")
+        MANAGER.draw_ui(WIN)
+
+        pygame.display.update()
+
+
+def get_user_name():
+    while True:
+        UI_REFRESH_RATE = clock.tick(60)/1000
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame_gui.UI_TEXT_ENTRY_FINISHED and event.ui_object_id == "#main_text_entry":     # checks if enter button is pressed
+                # show_text(event.text)
+                continue
+
+            MANAGER.process_events(event)
+
+        MANAGER.update(UI_REFRESH_RATE)
+        WIN.fill("white")
+        MANAGER.draw_ui(WIN)
+
         pygame.display.update()
 
 
 def main():
-    insertion_sort()
+    blank_page()
 
 
 if __name__ == '__main__':
